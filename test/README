@@ -1,0 +1,11 @@
+This folder contains a couple of utility scripts to automate checking the accuracy of the approximate triangle count code. 
+
+(1) Make sure you have an up-to-date build of the code in target/scala (rerun 'sbt compile package' if you aren't sure)
+
+(2) igraph needs to be installed (both the R and python packages) on your system
+
+(3) We are going to execute spark local and I'm currently using 5GB for each of 2 exectuors. Tweak that based on your system specs. (check the driver.scala as well as random_test.py)
+
+(4) To run the test execute 'python random_test.py {N}" where {N} is the number of nodes you want in a random graph
+
+(5) Check the error_figure.png in test_case when the code finished. 99 times out of 100 the red point and error bars should contain the blue point (the exact value)
