@@ -1,7 +1,7 @@
 #! /usr/bin/env Rscript
 
 library(igraph)
-library(sqldf)
+library(plyr)
 
 args <- commandArgs(trailingOnly = TRUE)
 filename <- args[1]
@@ -27,7 +27,11 @@ expBin <- function(deg){
 }
 data$bin <- apply(data['deg'], 1, expBin)
 
-binned_data <- sqldf('select bin, avg(ccoef), sum(triangles) from data group by bin')
+
+binned_data <-ddply(data,
+                    "bin",
+                    function(df)c(mean(df$ccoef), sum(df$triangles))
+)
 colnames(binned_data) <- c('deg', 'avg(ccoef)', '# triangles') # note its number of triangles with at least one vertex of degree 'deg' (triangles appear more than once in this list!)
 print(binned_data)
 print(paste('Global clustering coefficient = ', transitivity(g, type='global')))
