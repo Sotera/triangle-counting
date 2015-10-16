@@ -7,7 +7,7 @@ args <- commandArgs(trailingOnly = TRUE)
 filename <- args[1]
 edges <- read.table(filename, header=F, sep=",")
 g <- graph.data.frame(edges, directed=F)
-
+g <- simplify(g)
 
 triangles <- adjacent.triangles(g, vids=V(g))
 ccoef <- transitivity(g, type='local')
