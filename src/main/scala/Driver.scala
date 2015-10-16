@@ -26,6 +26,25 @@ object Driver {
 
 
 
+  def hashId(str:String) = {
+    Hashing.md5().hashString(str,Charsets.UTF_8).asLong()
+
+  }
+
+  def totuple(msg: Any) = {
+    msg match {
+      case tuple @ (a: Any, b: Any) => tuple
+    }
+  }
+  def tolong(anyval:Any):Long = {
+    val a:Option[Any] = Some(anyval) // Note using Any here
+    val i = (a match {
+        case Some(x:Long) => x // this extracts the value in a as an Int
+        case _ => 0
+      })
+    i
+  }
+
   def main(args: Array[String]): Unit ={
     // Start the Spark Context and the set the logging to something "reasonable"
     val conf = new SparkConf().setAppName("ApproxTriangles").setMaster("local[2]")
@@ -41,6 +60,7 @@ object Driver {
     //
     // For the moment I'm assuming the edges are just lists of IDs (longs)
     // in the format id1, id2 and that there are no attributes on anything
+<<<<<<< Updated upstream
 	val filename = args(0)
 	
 	val text = sc.textFile(filename).map(line => line.split(","))
