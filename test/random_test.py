@@ -66,7 +66,7 @@ def random_graph(graph_func, N, filename):
             f.write("{},{}\n".format(edge[0], edge[1]))
 
 def run_distributed_count(infile, outspark, outbins):
-    cmd = "spark-submit --executor-memory=5g   {} {} > {}".format(approxTriangleJar, infile, outspark)
+    cmd = "spark-submit --class Driver --jars ../src/main/scala/guava-11.0.jar  --executor-memory=5g   {} {} > {}".format(approxTriangleJar, infile, outspark)
     os.system(cmd)
     log("Finished running the spark job")
     with open(outspark, "r") as f:

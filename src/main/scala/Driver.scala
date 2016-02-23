@@ -43,7 +43,8 @@ object Driver {
     val filename = args(0)
 
     val text = sc.textFile(filename).map(line => line.split(","))
-    val edges = text.map(ids => (hashId(ids(0).trim), hashId(ids(1).trim)))
+    //val edges = text.map(ids => (hashId(ids(0).trim), hashId(ids(1).trim)))
+    val edges = text.map(ids => (ids(0).toLong, ids(1).toLong))
 
     //get all the opposite edges, these will contain all pairs
     val intersect = edges.map(e => (e._1, e._2)).intersection(edges.map(e => (e._2, e._1)))
