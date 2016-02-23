@@ -50,7 +50,7 @@ object TimingComparisons {
       val t2 = System.nanoTime()
       graph.triangleCount()
       val t3 = System.nanoTime()
-      println("[TIMING] Size: " + n.toString + " Exact time: " + (t1 - t0) + "ns")
+      println("[TIMING] Size: " + n.toString + " Exact time: " + (t3 - t2) + "ns")
     }
   }
 
